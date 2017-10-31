@@ -18,7 +18,7 @@ class Proxy
     @last_method_called = []
   end
   # WRITE CODE HERE
-  def __send__(methodid, *args)
+  def send(methodid, *args)
     @last_method_called << methodid
 	if args.size == 0
 	  @object.__send__(methodid)
@@ -29,7 +29,7 @@ class Proxy
   
   def method_missing(methodid, *args, &block)
     if @object.respond_to?(methodid)
-	  self.__send__(methodid, *args)
+	  self.send(methodid, *args)
 	else
       raise NoMethodError
 	end
